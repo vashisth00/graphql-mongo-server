@@ -1,7 +1,7 @@
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-micro'
-import typeDefs from '../../db/schema'
-import resolvers from '../../db/resolvers'
-import connectDb from '../../db/config'
+import typeDefs from '../db/schema'
+import resolvers from '../db/resolvers'
+import connectDb from '../db/config'
 
 connectDb()
 
