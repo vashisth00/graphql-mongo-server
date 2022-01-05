@@ -5,10 +5,35 @@ import connectDb from '../db/config'
 
 connectDb()
 
-export const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-})
+// export const schema = makeExecutableSchema({
+//   typeDefs,
+//   resolvers
+// })
+
+const apolloServer = new ApolloServer({ typeDefs, resolvers })
+
+const startServer = apolloServer.start()
+
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://graphql-mongo-server.vercel.app/'
+  )
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  if (req.method === 'OPTIONS') {
+    res.end()
+    return false
+  }
+
+  await startServer
+  await apolloServer.createHandler({
+    path: '/api/graphql',
+  })(req, res)
+}
 
 export const config = {
   api: {
@@ -16,6 +41,25 @@ export const config = {
   },
 }
 
-export default new ApolloServer({ schema }).createHandler({
-  path: '/api/graphql',
-})
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// }
+// const startTheServer = server.start;
+
+// export default new await startTheServer  ApolloServer({ schema }).createHandler({
+//   path: '/api/graphql',
+// })
+
+//   await startServer
+//   await apolloServer.createHandler({
+//     path: '/api/graphql',
+//   })(req, res)
+
+
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// });
