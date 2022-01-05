@@ -1,14 +1,9 @@
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-micro'
-import typeDefs from '../db/schema'
-import resolvers from '../db/resolvers'
-import connectDb from '../db/config'
+import typeDefs from '../../db/schema'
+import resolvers from '../../db/resolvers'
+import connectDb from '../../db/config'
 
 connectDb()
-
-// export const schema = makeExecutableSchema({
-//   typeDefs,
-//   resolvers
-// })
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers })
 
@@ -40,26 +35,3 @@ export const config = {
     bodyParser: false,
   },
 }
-
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// }
-// const startTheServer = server.start;
-
-// export default new await startTheServer  ApolloServer({ schema }).createHandler({
-//   path: '/api/graphql',
-// })
-
-//   await startServer
-//   await apolloServer.createHandler({
-//     path: '/api/graphql',
-//   })(req, res)
-
-
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// });
