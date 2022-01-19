@@ -17,7 +17,7 @@ const resolvers = {
       const product = await Product.findById(id)
 
       if (!product) {
-        throw new Error('Product not found')
+        throw new Error('Product not fohhundund')
       }
 
       return product
